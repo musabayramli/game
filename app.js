@@ -16,11 +16,35 @@ const exitBtn = document.getElementById("exit");
 const keyboardModeBtn = document.getElementById("keyboard-mode");
 const clickModeBtn = document.getElementById("click-mode");
 
+// Səs elementləri
+const bgMusic = document.getElementById("bg-music");
+const clickSound = document.getElementById("click-sound");
+const winSound = document.getElementById("win-sound");
+const loseSound = document.getElementById("lose-sound");
+
 // Oyun dəyişənləri
 let playerScore = 0;
 let computerScore = 0;
 let isKeyboardMode = false;
 const winningScore = 5;
+
+// Fon musiqisini başlat
+function startBackgroundMusic() {
+  bgMusic.volume = 0.5; 
+  bgMusic.play();
+}
+
+// Səs effektini çal
+function playSound(sound) {
+  sound.currentTime = 0; 
+  sound.play();
+}
+
+// Səsi dayandır
+function stopSound(sound) {
+  sound.pause();
+  sound.currentTime = 0;
+}
 
 // Kompüter seçimini al
 function getComputerChoice() {
@@ -73,12 +97,22 @@ function showEndModal(message) {
   endModal.querySelector("#winner-message").textContent = message;
   overlay.classList.remove("hidden");
   endModal.classList.remove("hidden");
+
+  // Qalibiyyət və ya məğlubiyyət səsi
+  if (message === "You won!") {
+    stopSound(loseSound); 
+    playSound(winSound); 
+  } else if (message === "Computer won!") {
+    stopSound(winSound);
+    playSound(loseSound); 
+  }
 }
 
-// Click mode
+// Klik rejimi
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     if (!isKeyboardMode) {
+      playSound(clickSound);
       const playerChoice = button.id.charAt(0).toUpperCase() + button.id.slice(1);
       updateGame(playerChoice);
     }
@@ -88,6 +122,7 @@ buttons.forEach((button) => {
 // Klaviatura rejimi
 document.addEventListener("keydown", (event) => {
   if (isKeyboardMode) {
+    playSound(clickSound);
     let playerChoice = "";
     if (event.key === "w") playerChoice = "Rock";
     if (event.key === "e") playerChoice = "Paper";
@@ -98,22 +133,29 @@ document.addEventListener("keydown", (event) => {
 
 // Klaviatura rejimini aktiv et və məlumat göstər
 keyboardModeBtn.addEventListener("click", () => {
+  startBackgroundMusic();
+  playSound(clickSound);
   isKeyboardMode = true;
   modeModal.classList.add("hidden");
   gameContainer.classList.remove("hidden");
-  keyboardInfo.classList.remove("hidden"); 
+  keyboardInfo.classList.remove("hidden");
 });
 
-// Click rejimini aktiv et
+// Klik rejimini aktiv et
 clickModeBtn.addEventListener("click", () => {
+  startBackgroundMusic();
+  playSound(clickSound);
   isKeyboardMode = false;
   modeModal.classList.add("hidden");
   gameContainer.classList.remove("hidden");
-  keyboardInfo.classList.add("hidden"); 
+  keyboardInfo.classList.add("hidden");
 });
 
 // Yenidən oynama düyməsi
 playAgainBtn.addEventListener("click", () => {
+  stopSound(winSound); 
+  stopSound(loseSound); 
+  playSound(clickSound);
   playerScore = 0;
   computerScore = 0;
   scoreElement.textContent = `Score - You: 0 | Computer: 0`;
@@ -126,10 +168,17 @@ playAgainBtn.addEventListener("click", () => {
 
 // Çıxış düyməsi
 exitBtn.addEventListener("click", () => {
+  stopSound(winSound); 
+  stopSound(loseSound);
+  playSound(clickSound);
   playerScore = 0;
   computerScore = 0;
   overlay.classList.add("hidden");
   endModal.classList.add("hidden");
   gameContainer.classList.add("hidden");
   modeModal.classList.remove("hidden");
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  startBackgroundMusic();
 });

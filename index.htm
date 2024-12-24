@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rock, Paper, Scissors</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- Səs faylları -->
+  <audio id="bg-music" src="./assets/sounds/background.mp3" loop></audio>
+  <audio id="click-sound" src="./assets/sounds/click.wav"></audio>
+  <audio id="win-sound" src="./assets/sounds/win.wav"></audio>
+  <audio id="lose-sound" src="./assets/sounds/lose.mp3"></audio>
+
   <div class="overlay hidden" id="overlay"></div>
+
   <div class="modal hidden" id="end-modal">
     <h2 id="winner-message">You Won!</h2>
     <div class="modal-buttons">
@@ -26,9 +35,9 @@
     <h1>Rock, Paper, Scissors</h1>
     <p id="keyboard-info" class="hidden">Use keys: <b>W</b> for Rock, <b>E</b> for Paper, <b>R</b> for Scissors.</p>
     <div class="buttons">
-      <img id="rock" src="./images/rock.png" alt="Rock" />
-      <img id="paper" src="./images/paper.png" alt="Paper" />
-      <img id="scissors" src="./images/scissors.png" alt="Scissors" />
+      <img id="rock" src="./assets/images/rock.png" alt="Rock" />
+      <img id="paper" src="./assets/images/paper.png" alt="Paper" />
+      <img id="scissors" src="./assets/images/scissors.png" alt="Scissors" />
     </div>
     <div class="result">
       <p id="player-choice">You chose: </p>
@@ -39,4 +48,5 @@
   </div>
   <script src="app.js"></script>
 </body>
+
 </html>

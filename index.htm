@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock, Paper, Scissors</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="overlay hidden" id="overlay"></div>
+  <div class="modal hidden" id="end-modal">
+    <h2 id="winner-message">You Won!</h2>
+    <div class="modal-buttons">
+      <button id="play-again">Play Again</button>
+      <button id="exit">Exit</button>
+    </div>
+  </div>
+
+  <div class="modal" id="mode-modal">
+    <h2>How would you like to play?</h2>
+    <button id="keyboard-mode">Keyboard</button>
+    <button id="click-mode">Click</button>
+  </div>
+
+  <div class="game-container hidden">
+    <h1>Rock, Paper, Scissors</h1>
+    <p id="keyboard-info" class="hidden">Use keys: <b>W</b> for Rock, <b>E</b> for Paper, <b>R</b> for Scissors.</p>
+    <div class="buttons">
+      <img id="rock" src="./images/rock.png" alt="Rock" />
+      <img id="paper" src="./images/paper.png" alt="Paper" />
+      <img id="scissors" src="./images/scissors.png" alt="Scissors" />
+    </div>
+    <div class="result">
+      <p id="player-choice">You chose: </p>
+      <p id="computer-choice">Computer chose: </p>
+      <p id="result-message">Result: </p>
+      <p id="score">Score - You: 0 | Computer: 0</p>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
